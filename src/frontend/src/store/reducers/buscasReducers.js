@@ -9,7 +9,6 @@ const initialState = {
 const buscasReducers = (state = initialState, action) => {
     switch(action.type){
         case "ADD_BUSCA":
-            console.log(action.texto)
             return Object.assign({}, state, {
                 list: [
                     ...state.list,
