@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { addBusca } from '../../store/actions/buscasActions'
 
+import SearchInputs from './SearchInputs'
+
 class Buscas extends Component {
     constructor(){
         super();
@@ -10,14 +12,15 @@ class Buscas extends Component {
             url: "",
             block: "",
             search_params: {
-                "1": "teste_1",
-                "2": "teste_2",
-                "3": "teste_3"
+                "Campo 1": "",
+                "Campo 2": "",
+                "Campo 3": ""
             }
         }
 
         this.handleInputChange = this.handleInputChange.bind(this)
         this.addBuscaClick = this.addBuscaClick.bind(this)
+        this.addElemento = this.addElemento.bind(this)
     }
 
     handleInputChange(event) {
@@ -30,17 +33,28 @@ class Buscas extends Component {
         this.props.addBusca(this.state.texto)
     }
 
+    addElemento(event) {
+        event.preventDefault()
+
+        this.setState(Object.assign(this.state.search_params, {"Campo 4": ""}))
+    }
+
     render(){
         return(
             <div className="buscas-container">
-                <input type="text" name="url" value={this.state.url} onChange={this.handleInputChange}/>
-                <input type="text" name="block" value={this.state.block} onChange={this.handleInputChange}/>
-                {Object.keys(this.state.search_params).map((key, index) => {
-                    return(
-                        <p key={index}>{this.state.search_params[key]}</p>
-                    )  
-                })}
-                <button onClick={this.addBuscaClick}>Add busca</button>
+                <form>
+                    <div className="form-group">
+                        <label>Url: </label>
+                        <input type="text" name="url" value={this.state.url} onChange={this.handleInputChange}/>
+                    </div>
+                    <div className="form-group">
+                        <label>Block: </label> 
+                        <input type="text" name="block" value={this.state.block} onChange={this.handleInputChange}/>
+                    </div>
+                    <SearchInputs search_params={this.state.search_params}></SearchInputs>
+                    <button onClick={this.addElemento}>Adiciona Elemento</button>
+                    <button onClick={this.addBuscaClick}>Add busca</button>
+                </form>
             </div>
         );
     }
