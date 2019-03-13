@@ -1,12 +1,20 @@
-import React, { Component } from 'react';
-import Buscas from '../components/Buscas/index'
+import React, { Fragment } from 'react';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import Grid from '@material-ui/core/Grid'
 
-class App extends Component {
-    render(){
-        return(
-            <Buscas></Buscas>
-        );
-    }
+const App = () =>  {
+    return(
+        <Fragment>
+            <CssBaseline />
+            <Grid
+                container
+                direction="row"
+                justify="center"
+                align-items="center"
+            />
+            
+        </Fragment>
+    );
 }
 
 export default App;
